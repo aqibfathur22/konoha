@@ -1,5 +1,4 @@
 <main class="p-4 overflow-y-auto flex-1">
-    <a href="admin_statistik.html">
         <div class="bg-slate-50 border rounded-lg p-4 shadow-md mt-5">
             <form action="" method="post">
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
@@ -85,5 +84,4 @@
                 </tbody>    
             </table>
         </div>
-    </a>
 </main>

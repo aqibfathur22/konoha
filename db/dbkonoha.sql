@@ -50,7 +50,7 @@ INSERT INTO `kategoripengaduan` (`id_kategori`, `nama_kategori`) VALUES
 
 CREATE TABLE `log_admin` (
   `id_admin` int(11) NOT NULL,
-  `email` varchar(225) NOT NULL,
+  `nama` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -58,7 +58,7 @@ CREATE TABLE `log_admin` (
 -- Dumping data untuk tabel `log_admin`
 --
 
-INSERT INTO `log_admin` (`id_admin`, `email`, `password`) VALUES
+INSERT INTO `log_admin` (`id_admin`, `nama`, `password`) VALUES
 (1, 'anhar24@students.amikom.ac.id', '12345678'),
 (2, 'admin', '12345678');
 

@@ -6,25 +6,39 @@
             <div class="mt-8 space-y-4">
                 <div class="rounded-lg p-12 bg-white text-slate-800 shadow-md">
                     <div class="flex gap-10 justify-between">
-                        <div>
-                            <p class="text-lg"><span class="font-semibold text-lg">Nama Pelapor :</span> <?= $data['detailPengaduan']['nama_pelapor'] ?></p>
-                            <p class="text-lg"><span class="font-semibold text-lg">Nomor Hp :</span> <?= $data['detailPengaduan']['nomor_telepon'] ?></p>
-                            <p class="text-lg"><span class="font-semibold text-lg">Kategori Aduan :</span> <?= $data['detailPengaduan']['nama_kategori'] ?></p>
-                            <p class="text-lg"><span class="font-semibold text-lg">Judul Aduan :</span> <?= $data['detailPengaduan']['judul_pengaduan'] ?></p>
-                            <p class="text-lg"><span class="font-semibold text-lg">Aduan :</span> <?= $data['detailPengaduan']['detail_pengaduan'] ?></p>
-                            <p class="text-lg"><span class="font-semibold text-lg">Tanggal :</span> <?= $data['detailPengaduan']['tanggal_dikirim'] ?></p>
-                        </div>
-                        <div class="px-6 w-2/6 h-120 border border-sky-400 rounded-lg text-center mb-2 overflow-x-scroll overflow-y-scroll">
-                            <p><span class="font-semibold">Lampiran:</span> 
-                                <img src="http://localhost/konoha/images/pengaduan/<?= $data['detailPengaduan']['path_lampiran'] ?>" 
-                                    alt="Lampiran" 
-                                    class="max-w-[100%] max-h-[100%] object-contain mt-4">
-                            </p>
-                            <br /><br /><br /><br />
-                        </div>
-                    </div>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="bg-white p-4 border rounded-lg shadow-sm">
+                                <div class="grid grid-cols-3 gap-2 text-slate-800">
+                                <p class="font-semibold">Nama Pelapor </p>
+                                <p class="col-span-2"><?= $data['detailPengaduan']['nama_pelapor'] ?></p>
 
-                    
+                                <p class="font-semibold text-left">Nomor Hp </p>
+                                <p class="col-span-2"><?= $data['detailPengaduan']['nomor_telepon'] ?></p>
+
+                                <p class="font-semibold text-left">Kategori Aduan </p>
+                                <p class="col-span-2"><?= $data['detailPengaduan']['nama_kategori'] ?></p>
+
+                                <p class="font-semibold text-left">Judul Aduan </span></p>
+                                <p class="col-span-2"><?= $data['detailPengaduan']['judul_pengaduan'] ?></p>
+
+                                <p class="font-semibold text-left">Aduan </p>
+                                <p class="col-span-2"><?= $data['detailPengaduan']['detail_pengaduan'] ?></p>
+
+                                <p class="font-semibold text-left">Tanggal </p>
+                                <p class="col-span-2"><?= $data['detailPengaduan']['tanggal_dikirim'] ?></p>
+                                </div>
+                            </div>
+
+                            <div class="bg-white p-4 border rounded-lg shadow-sm">  
+                                <p class="font-semibold text-center text-slate-800 mb-4">Lampiran:</p>
+                                <div class="flex justify-center">
+                                <img 
+                                    src="http://localhost/konoha/images/pengaduan/<?= $data['detailPengaduan']['path_lampiran'] ?>" 
+                                    alt="Lampiran" 
+                                    class="max-w-full max-h-64 object-contain border rounded">
+                            </div>
+                        </div>
+                    </div>             
                 </div>
             </div>
 

@@ -10,7 +10,7 @@
         <div class="bg-white/50 p-8 rounded-lg shadow-lg w-full max-w-md backdrop-blur-xl">
             <h2 class="text-2xl font-bold mb-6 text-center text-gray-800">Daftar Admin</h2>
 
-            <form action="#" method="POST" class="space-y-4">
+            <form action="<?=BASEURL?>/Register_controller" method="POST" class="space-y-4">
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Nama Pengguna</label>
                     <input
@@ -34,17 +34,11 @@
                     <a href="#" class="text-blue-600 hover:underline">Lupa kata sandi?</a>
                 </div>
 
-                <div class="grid grid-cols-1 h-5 mt-10 mb-5">
-                    <a
-                        class="w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition duration-300 text-center"
-                        href="#"
-                        >Daftar</a
-                    >
+                <div>
+                    <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition duration-300">
+                        Daftar
+                    </button>
                 </div>
-
-                <!-- <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-300" href="admin_beranda.html">
-        Masuk
-      </button> -->
             </form>
         </div>
     </body>

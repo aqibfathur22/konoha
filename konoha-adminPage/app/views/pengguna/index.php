@@ -84,6 +84,14 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="flex gap-4 justify-between">
+                            <button type="submit" class="w-1/2 bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition duration-300">
+                                Batal
+                            </button>
+                            <button type="submit" class="w-1/2 bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition duration-300">
+                                Edit
+                            </button>   
+                        </div>
                     </div>
                 </div>
             </main>
