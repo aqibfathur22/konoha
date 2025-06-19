@@ -14,7 +14,7 @@
                             data-wow-delay="0ms"
                             data-wow-offset="300">
                             <img
-                                src="img/profil/profil.jpeg"
+                                src="<?=BASEURL?>/src/assets/profil.jpeg"
                                 class="mx-auto object-cover w-full h-full rounded-xl hover:scale-110 transition-all duration-500 ease-in-out" />
                         </div>
                         <div
