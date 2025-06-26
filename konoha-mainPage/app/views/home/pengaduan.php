@@ -92,7 +92,7 @@
                         <textarea
                             name="detail_pengaduan"
                             id="pengaduan"
-                            class="w-full h-52 lg:60 px-6 py-4 mt-2 border-slate-300 text-sm lg:text-base border-2 rounded-xl focus:outline-none focus:border-sky-500 resize-none"
+                            class="w-full h-40 lg:h-30 lg:60 px-6 py-4 mt-2 border-slate-300 text-sm lg:text-base border-2 rounded-xl focus:outline-none focus:border-sky-500 resize-none"
                             required></textarea>
                     </div>
                     <!-- input : lampiran -->
@@ -113,12 +113,21 @@
                             </div>
                         </div>
                     </div>
-                    <!-- submit button -->
                     
+                    <!-- recaptcha -->
+                    <div class="flex justify-center mt-8">
+                        <div class="g-recaptcha wow animate__animated animate__fadeInUp"
+                            data-wow-duration="700ms"
+                            data-wow-delay="600ms" 
+                            data-sitekey="6LfmWm4rAAAAAMDVvphRP-SpAO-sxHOl9m2_ZQpt">
+                        </div>
+                    </div>
+                    
+                    <!-- submit button -->
                     <div
                         class="input-animate my-8 wow animate__animated animate__fadeInUp"
                         data-wow-duration="700ms"
-                        data-wow-delay="600ms">
+                        data-wow-delay="700ms">
                         <button
                             type="submit"
                             class="w-full h-10 px-6 mt-2 bg-sky-500 text-white text-sm rounded-xl hover:bg-sky-600 transition-all duration-500 ease-in-out cursor-pointer input-lg">

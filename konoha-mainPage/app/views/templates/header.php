@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 
         <link href="<?= BASEURL; ?>/src/output.css" rel="stylesheet" />
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
     
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="../assets/img/konoha.png">

@@ -18,14 +18,33 @@ class Home_controller extends Controllers {
         $this->view("templates/footer");
     }    
 
-    public function createPengaduan() {
+    public function createPengaduan() 
+    {
+        if (!isset($_POST['g-recaptcha-response']) || empty($_POST['g-recaptcha-response'])) {
+            Flasher::setFlash('Verifikasi captcha diperlukan', 'error');
+            header("Location: " . BASEURL . "/Home_controller#pengaduan");
+            exit;
+        }
+
+        $recaptchaSecret = '6LfmWm4rAAAAAPwye5W9WfXoRuWUSYRS-oPBwFOU'; 
+        $recaptchaResponse = $_POST['g-recaptcha-response'];
+
+        $verify = file_get_contents("https://www.google.com/recaptcha/api/siteverify?secret={$recaptchaSecret}&response={$recaptchaResponse}");
+        $responseData = json_decode($verify);
+
+        if (!$responseData->success) {
+            Flasher::setFlash('Verifikasi captcha gagal', 'error');
+            header("Location: " . BASEURL . "/Home_controller#pengaduan");
+            exit;
+        }
+
         if ($this->model('Pengaduan_model')->create($_POST) > 0) {
             Flasher::setFlash('Aduan berhasil dikirim', 'success');
-            header("Location: " . BASEURL . "/Home_Controller#pengaduan");
+            header("Location: " . BASEURL . "/Home_controller#pengaduan");
             exit;
         } else {
             Flasher::setFlash('Aduan gagal dikirim', 'error');
-            header("Location: " . BASEURL . "/Home_Controller#pengaduan");
+            header("Location: " . BASEURL . "/Home_controller#pengaduan");
             exit;
         }
     }
