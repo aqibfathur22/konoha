@@ -8,36 +8,95 @@ class Profil_model {
         $this->conn = new Database();
     }
 
-    public function create($data) {
-
+    public function getAllProfil() {
         try {
-            $gambarBerita = null;
-            if (!empty($_FILES['gambar']['name'])) {
-                $gambarBerita = $this->upload();
-                if (!$gambarBerita) {
-                    return false;
-                }
-            }
-
-            $judulBerita = htmlspecialchars(strip_tags($data['judul']));
-            $deskripsiBerita = htmlspecialchars(strip_tags($data['deskripsi']));
-            
-            $query = "INSERT INTO " . $this->table_name . "
-                    (gambar, judul, deskripsi)
-                    VALUES (:gambar, :judul, :deskripsi)";
-
+            $query = "SELECT * FROM " . $this->table_name;
+    
             $this->conn->query($query);
 
-            // Bind parameters
-            $this->conn->bindParam(":gambar", $gambarBerita);
-            $this->conn->bindParam(":judul", $judulBerita);
-            $this->conn->bindParam(":deskripsi", $deskripsiBerita);
-
-            $this->conn->execute();
-            return $this->conn->rowCount();
+            return $this->conn->getAll();
+            
         } catch (Exception $e) {
+            error_log($e->getMessage());
             header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }  
+    }
+
+    public function getProfilById($id_profil) {
+        try {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE id_profil = :id_profil";
+    
+            $this->conn->query($query);
+            $this->conn->bindParam(':id_profil', $id_profil);
+    
+            return $this->conn->get();
+
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }  
+    }
+
+    public function update($data) {
+        try {
+            if (!isset($data['id_profil'])) {
+                throw new Exception("ID profil tidak ditemukan");
+            }
+    
+            $oldData = $this->getProfilById($data['id_profil']);
+            $gambarProfil = $oldData['gambar']; 
+    
+            if (!empty($_FILES['gambar']['name'])) {
+                $gambarBaru = $this->upload();
+                if (!$gambarBaru) {
+                    return false;
+                }
+
+                $gambarProfil = $gambarBaru;
+
+                if (!empty($oldData['gambar'])) {
+                    $this->deleteFile($oldData['gambar']);
+                }
+            }
+    
+            $deskripsiProfil = htmlspecialchars(strip_tags($data['deskripsi']));
+            $idProfil = htmlspecialchars(strip_tags($data['id_profil']));
+            
+            $query = "UPDATE " . $this->table_name . " SET
+                        deskripsi = :deskripsi";
+
+            if (!empty($_FILES['gambar']['name'])) {
+                $query .= ", gambar = :gambar";
+            }
+            
+            $query .= " WHERE id_profil = :id_profil";
+    
+            $this->conn->query($query);
+
+            $this->conn->bindParam(":deskripsi", $deskripsiProfil);
+            if (!empty($_FILES['gambar']['name'])) {
+                $this->conn->bindParam(":gambar", $gambarProfil);
+            }
+            $this->conn->bindParam(":id_profil", $idProfil);
+    
+            $this->conn->execute();
+
+            return $this->conn->rowCount();
+            
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            return false;
         }       
+    }
+
+    private function deleteFile($filePath) {
+        $fullPath = $_SERVER['DOCUMENT_ROOT'] . '/konoha/images/profil/' . $filePath;
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
 
     public function upload() {       
@@ -79,7 +138,7 @@ class Profil_model {
             $namaFileBaru = uniqid();
             $namaFileBaru .= '.';
             $namaFileBaru .= $formatGambar;
-            $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/konoha/images/berita/' . $namaFileBaru;
+            $uploadPath = $_SERVER['DOCUMENT_ROOT'] . '/konoha/images/profil/' . $namaFileBaru;
 
             if (!move_uploaded_file($tmpName, $uploadPath)) {
                 echo "<script>alert('Upload gagal: tidak bisa simpan ke folder img!');</script>";

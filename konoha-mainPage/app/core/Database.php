@@ -9,7 +9,6 @@ class Database {
     private $stmt;
 
     public function __construct() {
-
         try {
             $this->conn = new PDO(
                 "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8mb4",
@@ -20,7 +19,7 @@ class Database {
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
                 )
-                );
+            );
         } catch(PDOException $exception) {
             die($exception->getMessage());
         }

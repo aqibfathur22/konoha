@@ -2,7 +2,7 @@
 
 class Statistik_controller extends Controllers {
     public function index() {
-        $data['title'] = "Konoha - statistik";
+        $data['title'] = "Statistik Pengaduan";
         $data['dataStatistik'] = $this->model('Statistik_model')->getStatistik($data);
         $data['dataPengaduan'] = $this->model('Statistik_model')->getAllStatistik(50, null, 'total');
         $data['menunggu'] = $this->model('Statistik_model')->getMenungguStatistik();

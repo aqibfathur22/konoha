@@ -11,15 +11,15 @@ class Register_model {
     public function register($username, $password) {
         // Cek apakah username sudah ada
         $this->conn->query("SELECT * FROM {$this->table_name} WHERE nama = :nama");
-        $this->conn->bind(":nama", $username);
-        if ($this->conn->single()) {
+        $this->conn->bindParam(":nama", $username);
+        if ($this->conn->get()) {
             return false; // Username sudah ada
         }
 
         // Insert user baru
         $this->conn->query("INSERT INTO {$this->table_name} (nama, password) VALUES (:nama, :password)");
-        $this->conn->bind(":nama", $username);
-        $this->conn->bind(":password", $password); // sudah hash dari controller
+        $this->conn->bindParam(":nama", $username);
+        $this->conn->bindParam(":password", $password); // sudah hash dari controller
 
         return $this->conn->execute(); // return true jika berhasil
     }

@@ -9,10 +9,9 @@
         <!-- css sources -->
         <link href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
         <link href="<?= BASEURL; ?>/src/output.css" rel="stylesheet" />
-
+    
         <!-- Favicon -->
         <link rel="icon" type="image/x-icon" href="../assets/img/konoha.png">
 

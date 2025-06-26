@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 17 Jun 2025 pada 23.54
+-- Waktu pembuatan: 26 Jun 2025 pada 06.10
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -38,7 +38,8 @@ CREATE TABLE `kategoripengaduan` (
 
 INSERT INTO `kategoripengaduan` (`id_kategori`, `nama_kategori`) VALUES
 (3, 'Keamanan'),
-(4, 'Kesehatan'),
+(7, 'Kesehatan'),
+(14, 'Layanan'),
 (2, 'Sosial'),
 (1, 'Umum');
 
@@ -50,7 +51,7 @@ INSERT INTO `kategoripengaduan` (`id_kategori`, `nama_kategori`) VALUES
 
 CREATE TABLE `log_admin` (
   `id_admin` int(11) NOT NULL,
-  `nama` varchar(225) NOT NULL,
+  `email` varchar(225) NOT NULL,
   `password` varchar(225) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -58,7 +59,7 @@ CREATE TABLE `log_admin` (
 -- Dumping data untuk tabel `log_admin`
 --
 
-INSERT INTO `log_admin` (`id_admin`, `nama`, `password`) VALUES
+INSERT INTO `log_admin` (`id_admin`, `email`, `password`) VALUES
 (1, 'anhar24@students.amikom.ac.id', '12345678'),
 (2, 'admin', '12345678');
 
@@ -88,7 +89,9 @@ INSERT INTO `pengaduan` (`id_pengaduan`, `nama_pelapor`, `nomor_telepon`, `id_ka
 (1, 'Desi', '098904832423', 1, 'sampah berserakan', 'banyak sampah yang berserakan di jalan utara sehingga menyebabkan bau', '6851494163ea0.png', '2025-06-17 10:53:53', 'menunggu'),
 (2, 'Fade', '2313123423123', 3, 'maling', 'banyak maling berkeliaran', '6851c0fe69a01.png', '2025-06-17 19:24:46', 'diproses'),
 (3, 'jesse', '231312213213', 1, 'korup geden', 'pejabat korup 100t', '6851c11d080ac.png', '2025-06-17 19:25:17', 'selesai'),
-(4, 'budiono siregar', '345435367458', 1, 'Jalan rusak', 'banyak jalan yang rusak', '6851c14348e3c.png', '2025-06-17 19:25:55', 'ditolak');
+(4, 'budiono siregar', '345435367458', 1, 'Jalan rusak', 'banyak jalan yang rusak', '6851c14348e3c.png', '2025-06-17 19:25:55', 'ditolak'),
+(5, 'Wulan', '08244472898', 2, 'Tenaga kesehatannya kurang prefesional di puskes', 'Perawat di puskes gudes, tidak melayani dengan baik', NULL, '2025-06-18 05:52:30', 'menunggu'),
+(6, 'Anita', '67890234820', 3, 'CCTV desa mati', 'CCTV desa mati jadi kalo ada maling gk keliatan kayak kemarin', NULL, '2025-06-18 05:54:14', 'menunggu');
 
 -- --------------------------------------------------------
 
@@ -99,10 +102,15 @@ INSERT INTO `pengaduan` (`id_pengaduan`, `nama_pelapor`, `nomor_telepon`, `id_ka
 CREATE TABLE `profil_desa` (
   `id_profil` int(11) NOT NULL,
   `gambar` varchar(225) DEFAULT NULL,
-  `judul` varchar(225) NOT NULL,
-  `deskripsi` text DEFAULT NULL,
-  `id_admin` int(11) NOT NULL
+  `deskripsi` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data untuk tabel `profil_desa`
+--
+
+INSERT INTO `profil_desa` (`id_profil`, `gambar`, `deskripsi`) VALUES
+(1, '685cad81355bc.jpeg', 'Desa konoha merupakan desa tempat orang orang melakukan korupsi.');
 
 -- --------------------------------------------------------
 
@@ -112,7 +120,7 @@ CREATE TABLE `profil_desa` (
 
 CREATE TABLE `tb_berita` (
   `id_berita` int(11) NOT NULL,
-  `gambar` varchar(225) DEFAULT NULL,
+  `gambar` varchar(255) NOT NULL,
   `judul` varchar(225) NOT NULL,
   `tanggal_berita` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   `deskripsi` text DEFAULT NULL,
@@ -124,9 +132,10 @@ CREATE TABLE `tb_berita` (
 --
 
 INSERT INTO `tb_berita` (`id_berita`, `gambar`, `judul`, `tanggal_berita`, `deskripsi`, `id_admin`) VALUES
-(19, '685156381f00f.png', 'seorang pejabat diduga menggunakan jalur nepotisme', '2025-06-17 21:13:51', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex turpis, semper non laoreet et, pellentesque vel nulla. Praesent semper eu turpis non mattis. Donec aliquet, quam nec aliquet luctus, ante dolor luctus mi, ac ullamcorper sem purus non lorem. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Mauris vitae dui nulla. Donec gravida elementum nunc vitae hendrerit. Nulla odio diam, dictum nec imperdiet eget, varius sed orci. Proin vehicula leo urna, quis sollicitudin orci interdum vitae. Integer volutpat pretium sem, in porta purus maximus id. Vivamus sit amet iaculis erat, non dictum lorem. Praesent auctor leo nulla, gravida egestas purus dapibus nec. Quisque a arcu elementum, condimentum dolor sed, consequat nisi. Sed in venenatis eros, sit amet condimentum sapien.\n\nDonec vehicula ultricies nunc id lacinia. Proin laoreet sem sem. Sed eleifend dui non pretium ornare. Proin blandit eget est quis venenatis. Pellentesque nec imperdiet sapien. Sed pellentesque sed neque at viverra. Maecenas et sapien bibendum, accumsan leo ac, pulvinar lectus. Mauris a lacinia odio, ac volutpat odio.', NULL),
-(20, '68515afe78b1e.png', 'wi wok de tok', '2025-06-17 12:09:34', 'not onle tok de tok', NULL),
-(21, '6851db0eaee66.png', 'Mantan kepala desa konoha diduga telah melakukan korupsi selama masa pemerintahanya', '2025-06-17 21:15:58', 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris ex turpis, semper non laoreet et,\r\n                                    pellentesque vel nulla. Praesent semper eu turpis non mattis. Donec aliquet, quam nec aliquet luctus,\r\n                                    ante dolor luctus mi, ac ullamcorper sem purus non lorem. Vestibulum ante ipsum primis in faucibus orci\r\n                                    luctus et ultrices posuere cubilia curae; Mauris vitae dui nulla. Donec gravida elementum nunc vitae\r\n                                    hendrerit. Nulla odio diam, dictum nec imperdiet eget, varius sed orci. Proin vehicula leo urna, quis\r\n                                    sollicitudin orci interdum vitae. Integer volutpat pretium sem, in porta purus maximus id. Vivamus sit\r\n                                    amet iaculis erat, non dictum lorem. Praesent auctor leo nulla, gravida egestas purus dapibus nec.\r\n                                    Quisque a arcu elementum, condimentum dolor sed, consequat nisi. Sed in venenatis eros, sit amet\r\n                                    condimentum sapien.\r\n\r\nDonec vehicula ultricies nunc id lacinia. Proin laoreet sem sem. Sed eleifend dui non pretium ornare.\r\n                                    Proin blandit eget est quis venenatis. Pellentesque nec imperdiet sapien. Sed pellentesque sed neque at\r\n                                    viverra. Maecenas et sapien bibendum, accumsan leo ac, pulvinar lectus. Mauris a lacinia odio, ac\r\n                                    volutpat odio.', NULL);
+(21, '6851db0eaee66.png', 'Mantan kepala desa konoha diduga telah melakukan korupsi selama masa pemerintahanya', '2025-06-24 11:22:55', 'Sed feugiat eu dui ut aliquam. Ut tincidunt lacinia erat, in vulputate lectus ultricies vitae. Nulla dignissim mi semper, ornare metus sed, accumsan eros. Phasellus rutrum consequat mauris eu sollicitudin. Sed vitae vestibulum felis, vel fringilla ipsum. Cras in lacinia lectus. Nulla ultricies lacinia metus, tincidunt pharetra tellus tincidunt quis. Sed quam ex, dapibus sit amet justo id, convallis auctor lacus. Nullam a est quam. Nam euismod vitae velit eu sodales. Nunc sed tincidunt mauris, a elementum nibh.\r\n\r\nPhasellus sed tortor interdum, feugiat orci non, hendrerit mauris. Proin vel mauris at felis varius mollis vel ut diam. In et eleifend magna. Maecenas sodales, purus sit amet pulvinar efficitur, est magna gravida mauris, dignissim dictum nisl nunc nec est. Donec convallis risus aliquet, gravida purus in, condimentum risus. Etiam eget est faucibus, laoreet leo nec, blandit risus. Phasellus nunc metus, blandit sed mauris et, facilisis semper odio. Proin arcu purus, dictum vitae enim vitae, varius elementum dui. Nam varius aliquet diam, at aliquam odio gravida a. Donec fringilla, augue vel venenatis maximus, nisl lectus feugiat ipsum, a vestibulum leo orci ac dolor. Aliquam eget lacus ac est porttitor volutpat. Nullam a urna quis libero tristique commodo eget et enim. Sed a mauris vel orci porta rutrum ac ac turpis. In hac habitasse platea dictumst. Donec fermentum nulla eu augue ullamcorper tempus. Integer fermentum, tellus eget elementum tincidunt, mauris dui porta velit, nec pellentesque ligula arcu at lectus', NULL),
+(22, '685246824403c.jpg', 'Panen Raya Desa Konoha ', '2025-06-23 12:34:57', 'Panen padi serentak, Desa Konoha terpilih menjadi tuan rumah panen raya sereektak 2025\r\nProgram ini mengungkap pentingnya perhatian di sektor pertanian, khususnya padi. Dan Desa Konoha adalah salah satu Desa yang menjadi lumbung padi Nasional', NULL),
+(23, '685248cdd55ad.jpeg', 'Kerja Bakti ', '2025-06-24 11:24:32', 'Pada 18 Juni 2025, Desa Konoha telah melaksanakan kerja bakti untuk memperbaiki jalan. Selain memperbaiki jalan program kerja bakti juga mempererat silahturahmi antar warga desa.;.', NULL),
+(24, '685a8bc6163f1.jpg', 'Penghargaan Desa Konohaa', '2025-06-24 11:28:06', 'Pada tanggal 15 Juli 2025, Desa konoha mendapat penghargaan Desa tebaik dalam pengelolaan dan pendistribusian dana desa.', NULL);
 
 -- --------------------------------------------------------
 
@@ -188,8 +197,7 @@ ALTER TABLE `pengaduan`
 -- Indeks untuk tabel `profil_desa`
 --
 ALTER TABLE `profil_desa`
-  ADD PRIMARY KEY (`id_profil`),
-  ADD KEY `id_admin` (`id_admin`);
+  ADD PRIMARY KEY (`id_profil`);
 
 --
 -- Indeks untuk tabel `tb_berita`
@@ -220,7 +228,7 @@ ALTER TABLE `tb_keuangan`
 -- AUTO_INCREMENT untuk tabel `kategoripengaduan`
 --
 ALTER TABLE `kategoripengaduan`
-  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT untuk tabel `log_admin`
@@ -232,19 +240,19 @@ ALTER TABLE `log_admin`
 -- AUTO_INCREMENT untuk tabel `pengaduan`
 --
 ALTER TABLE `pengaduan`
-  MODIFY `id_pengaduan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_pengaduan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT untuk tabel `profil_desa`
 --
 ALTER TABLE `profil_desa`
-  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_berita`
 --
 ALTER TABLE `tb_berita`
-  MODIFY `id_berita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_berita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
 -- AUTO_INCREMENT untuk tabel `tb_demografi`
@@ -267,12 +275,6 @@ ALTER TABLE `tb_keuangan`
 --
 ALTER TABLE `pengaduan`
   ADD CONSTRAINT `pengaduan_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategoripengaduan` (`id_kategori`);
-
---
--- Ketidakleluasaan untuk tabel `profil_desa`
---
-ALTER TABLE `profil_desa`
-  ADD CONSTRAINT `profil_desa_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `log_admin` (`id_admin`);
 
 --
 -- Ketidakleluasaan untuk tabel `tb_berita`

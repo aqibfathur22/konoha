@@ -8,28 +8,28 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
                 <!-- Total -->
                 <button name="total" cursor="pointer" class="hover:scale-103 focus:bg-sky-50 bg-white rounded-2xl shadow-lg p-6 border-2 border-slate-100 hover:shadow-xl transition-all duration-700 ease-in-out">     
-                    <h3 class="text-xl font-semibold text-slate-700">Total Pengaduan</h3>
+                    <h3 class="text-lg font-semibold text-slate-700">Total Pengaduan</h3>
                     <p class="text-4xl font-bold text-indigo-600 mt-2">
                         <?= $data['dataStatistik']['total'] ?? 0 ?>
                     </p>
                 </button>
                 <!-- Pending -->
                 <button name="menunggu" class="hover:scale-103 focus:bg-sky-50 bg-white rounded-2xl shadow-lg p-6 border-2 border-slate-100 hover:shadow-xl transition-all duration-700 ease-in-out">
-                    <h3 class="text-xl font-semibold text-slate-700">Menunggu</h3>
+                    <h3 class="text-lg font-semibold text-slate-700">Menunggu</h3>
                     <p class="text-4xl font-bold text-yellow-500 mt-2">
                         <?= $data['dataStatistik']['menunggu'] ?? 0 ?>
                     </p>
                 </button>
                 <!-- Diproses -->
                 <button name="diproses" cursor="pointer" class="hover:scale-103 focus:bg-sky-50 bg-white rounded-2xl shadow-lg p-6 border-2 border-slate-100 hover:shadow-xl transition-all duration-700 ease-in-out">
-                    <h3 class="text-xl font-semibold text-slate-700">Diproses</h3>
+                    <h3 class="text-lg font-semibold text-slate-700">Diproses</h3>
                     <p class="text-4xl font-bold text-blue-500 mt-2">
                             <?= $data['dataStatistik']['diproses'] ?? 0 ?>
                     </p>
                 </button>
                 <!-- Selesai -->
                 <button name="selesai" cursor="pointer" class="hover:scale-103 focus:bg-sky-50 bg-white rounded-2xl shadow-lg p-6 border-2 border-slate-100 hover:shadow-xl transition-all duration-700 ease-in-out">
-                    <h3 class="text-xl font-semibold text-slate-700">Selesai</h3>
+                    <h3 class="text-lg font-semibold text-slate-700">Selesai</h3>
                     <p class="text-4xl font-bold text-green-500 mt-2">
                             <?= $data['dataStatistik']['selesai'] ?? 0 ?>
                     </p>

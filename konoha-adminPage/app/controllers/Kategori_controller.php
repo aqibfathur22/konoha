@@ -18,8 +18,20 @@ class Kategori_controller extends Controllers {
     }
 
     public function createKategori() {
-        if ($this->model('Kategori_Model')->create($_POST) > 0) {
-            header("Location: " . BASEURL . "/kategori");
+        if ($this->model('Kategori_model')->create($_POST) > 0) {
+            Flasher::setFlash('Kategori berhasil ditambahakan', 'success');
+            header("Location: " . BASEURL . "/Kategori_controller");
+            exit;
+        } else {
+            Flasher::setFlash('Kategori berhasil ditambahakan', 'error');
+            header("Location: " . BASEURL . "/Kategori_controller");
+            exit;
+        }
+    }
+
+    public function deleteKategori($idKategori) {
+        if ($this->model('Kategori_model')->delete($idKategori) > 0) {
+            header("Location: " . BASEURL . " /Kategori_controller");
             exit;
         }
     }

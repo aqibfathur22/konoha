@@ -3,10 +3,8 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Admin_Postingan</title>
+        <title><?= $data['title']  ?></title>
         <link rel="stylesheet" href="<?= BASEURL; ?>/src/output.css" />
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     </head>
     <body class="bg-white text-slate-50">
@@ -16,43 +14,34 @@
                     <h1 class="text-xl font-semibold my-2 text-center">Admin Konoha</h1>
                     <hr class="my-4 border-t-3" />
                     <nav class="mt-4">
-                        <a 
-                            href="<?= BASEURL; ?>/Beranda_controller" 
-                            class="<?= $data['berandaNav'] ?>">
+                        <a href="<?= BASEURL; ?>/Beranda_controller" class="<?= $data['berandaNav'] ?>">
                             <div class="w-5 h-5">
                                 <i class="fa-solid fa-home"></i>
                             </div>
                             Beranda
                         </a>
-                        <a
-                            href="<?= BASEURL; ?>/Pengguna_controller"
-                            class="<?= $data['penggunaNav'] ?>">
+                        <a href="<?= BASEURL; ?>/Pengguna_controller" class="<?= $data['penggunaNav'] ?>">
                             <div class="w-5 h-5">
                                 <i class="fa-solid fa-user"></i>
                             </div>
                             Pengguna
                         </a>
-                        <a
-                            href="<?= BASEURL; ?>/Berita_controller"
-                            class="<?= $data['beritaNav'] ?>">
+                        <a href="<?= BASEURL; ?>/Berita_controller" class="<?= $data['beritaNav'] ?>">
                             <div class="w-5 h-5">
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
                             Berita
                         </a>
-                        <a
-                            href="<?= BASEURL; ?>/Profil_controller"
-                            class="<?= $data['profilNav'] ?>">
+                        <a href="<?= BASEURL; ?>/Profil_controller" class="<?= $data['profilNav'] ?>">
                             <div class="w-5 h-5">
                                 <i class="fa-solid fa-paper-plane"></i>
                             </div>
                             Profil Desa
                         </a>
-                        <a  href="<?= BASEURL; ?>/Kategori_controller"
-                            class="<?= $data['kategoriNav'] ?>">
+                        <a href="<?= BASEURL; ?>/Kategori_controller" class="<?= $data['kategoriNav'] ?>">
                             <div class="w-5 h-5">
-                            <i class="fa-solid fa-paper-plane"></i>
-                            </div> 
+                                <i class="fa-solid fa-paper-plane"></i>
+                            </div>
                             Kategori
                         </a>
                     </nav>
@@ -86,3 +75,4 @@
                     </div>
                     <hr class="my-4 border-t-4 text-sky-800" />
                 </div>
+

@@ -8,8 +8,38 @@ class Berita_model {
         $this->conn = new Database();
     }
 
-    public function create($data) {
+    public function getAllBerita() {
+        try {
+            $query = "SELECT * FROM " . $this->table_name;
+    
+            $this->conn->query($query);
 
+            return $this->conn->getAll();
+            
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }  
+    }
+
+    public function getBeritaById($id_berita) {
+        try {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita = :id_berita";
+    
+            $this->conn->query($query);
+            $this->conn->bindParam(':id_berita', $id_berita);
+    
+            return $this->conn->get();
+
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }  
+    }
+
+    public function create($data) {
         try {
             $gambarBerita = null;
             if (!empty($_FILES['gambar']['name'])) {
@@ -28,16 +58,122 @@ class Berita_model {
 
             $this->conn->query($query);
 
-            // Bind parameters
             $this->conn->bindParam(":gambar", $gambarBerita);
             $this->conn->bindParam(":judul", $judulBerita);
             $this->conn->bindParam(":deskripsi", $deskripsiBerita);
 
             $this->conn->execute();
+
             return $this->conn->rowCount();
+
         } catch (Exception $e) {
+            error_log($e->getMessage());
             header("Location: " . BASEURL . "/Error_controller");
+            exit;
         }       
+    }
+
+    public function update($data) {
+        try {
+            if (!isset($data['id_berita'])) {
+                throw new Exception("ID Berita tidak ditemukan");
+            }
+    
+            $oldData = $this->getBeritaById($data['id_berita']);
+            $gambarBerita = $oldData['gambar']; 
+    
+            if (!empty($_FILES['gambar']['name'])) {
+                $gambarBaru = $this->upload();
+                if (!$gambarBaru) {
+                    return false;
+                }
+
+                $gambarBerita = $gambarBaru;
+
+                if (!empty($oldData['gambar'])) {
+                    $this->deleteFile($oldData['gambar']);
+                }
+            }
+    
+            $judulBerita = htmlspecialchars(strip_tags($data['judul']));
+            $deskripsiBerita = htmlspecialchars(strip_tags($data['deskripsi']));
+            $idBerita = htmlspecialchars(strip_tags($data['id_berita']));
+            
+            $query = "UPDATE " . $this->table_name . " SET
+                        judul = :judul,
+                        deskripsi = :deskripsi";
+
+            if (!empty($_FILES['gambar']['name'])) {
+                $query .= ", gambar = :gambar";
+            }
+            
+            $query .= " WHERE id_berita = :id_berita";
+    
+            $this->conn->query($query);
+
+            $this->conn->bindParam(":judul", $judulBerita);
+            $this->conn->bindParam(":deskripsi", $deskripsiBerita);
+            if (!empty($_FILES['gambar']['name'])) {
+                $this->conn->bindParam(":gambar", $gambarBerita);
+            }
+            $this->conn->bindParam(":id_berita", $idBerita);
+    
+            $this->conn->execute();
+
+            return $this->conn->rowCount();
+            
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            return false;
+        }       
+    }
+
+    public function delete($idBerita) {
+        try {
+            $querySel = "SELECT gambar FROM " . $this->table_name . " WHERE id_berita = :id_berita";
+
+            $this->conn->query($querySel);
+            $this->conn->bindParam(":id_berita", $idBerita);
+            $this->conn->execute(); 
+
+            $result = $this->conn->get();
+
+            if (!$result) {
+                return false; // Data tidak ditemukan
+            }
+    
+            $gambar = $result['gambar'];
+            
+            $queryDel = "DELETE FROM " . $this->table_name . " WHERE id_berita = :id_berita";
+
+            $this->conn->query($queryDel);
+            $this->conn->bindParam(":id_berita", $idBerita);
+            $this->conn->execute();
+
+            $rowCount = $this->conn->rowCount();
+
+            if ($rowCount > 0 && !empty($gambar)) {
+                $pathGambar = $_SERVER['DOCUMENT_ROOT'] . '/konoha/images/berita/' . $gambar;
+                if (file_exists($pathGambar)) {
+                    unlink($pathGambar);
+                }
+            }
+
+            return $rowCount;
+            
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }   
+    }
+
+    private function deleteFile($filePath) {
+        $fullPath = $_SERVER['DOCUMENT_ROOT'] . '/konoha/images/berita/' . $filePath;
+        if (file_exists($fullPath)) {
+            unlink($fullPath);
+        }
     }
 
     public function upload() {       
@@ -47,7 +183,6 @@ class Berita_model {
             $error = $_FILES['gambar']['error'];
             $tmpName = $_FILES['gambar']['tmp_name']; 
 
-                    //cek apakah tidak ada gambar yang diupload
             if( $error === 4 ) {
                 echo "<script>
                         alert('pilih gambar terlebih dahulu!');
@@ -55,7 +190,6 @@ class Berita_model {
                 return false;
             }
 
-            //cek apakah yang diupload adalah gambar
             $formatGambarValid = ['jpg', 'jpeg', 'png'];
             $formatGambar = explode('.', $namaFile);
             $formatGambar = strtolower(end($formatGambar));
@@ -66,7 +200,6 @@ class Berita_model {
                 return false;
             }
 
-            //cek jika ukuran gambar terlalu besars
             if( $ukuranFile > 2000000 ) {
                 echo "<script>
                         alert('ukuran gambar terlalu besar!');
@@ -74,8 +207,6 @@ class Berita_model {
                 return false;
             }
 
-            //lolos pengecekan, gambar siap diupload
-            //generate nama gambar baru
             $namaFileBaru = uniqid();
             $namaFileBaru .= '.';
             $namaFileBaru .= $formatGambar;
@@ -89,6 +220,7 @@ class Berita_model {
             return $namaFileBaru;
         } catch (Exception $e) {
             header("Location: " . BASEURL . "/Error_controller");
+            exit;
         }
     }    
 }

@@ -1,4 +1,3 @@
-
     <!-- FOOTER START -->
     <footer>
         <div class="container mx-auto px-2 max-w-sm md:max-w-xl lg:max-w-4xl xl:max-w-6xl">
@@ -19,6 +18,7 @@
                                 </p>
                             </div>
                         </div>
+
                         <!-- Contact -->
                         <div class="mx-6 pt-5 mb-4">
                             <h2 class="font-normal xl:font-semibold text-sm lg:text-lg text-white mb-4">Hubungi Kami</h2>
@@ -26,10 +26,12 @@
                                 <i class="fa-solid fa-phone text-white text-sm lg:text-base xl:text-xl"></i>
                                 <h3 class="text-white font-light xl:font-normal text-xs lg:text-base tracking-wide">+62 8966677788</h3>
                             </div>
+
                             <div class="flex flex-row items-center gap-3 ml-2 mb-6">
                                 <i class="fa-solid fa-envelope text-white text-sm lg:text-base xl:text-xl"></i>
                                 <h3 class="text-white font-light xl:font-normal text-xs lg:text-base tracking-wide">konoha@konoha.com</h3>
                             </div>
+                            
                             <div class="flex flex-row items-center gap-3 lg:gap-5 ml-2">
                                 <a href="">
                                     <img src="<?=BASEURL?>/src/assets/icon/instagram.svg" class="w-8 lg:w-12" />
@@ -49,9 +51,11 @@
                             </div>
                         </div>
                     </div>
+
                     <!-- Menu -->
                     <div class="mx-6 pt-5 mb-4 md:w-[30%] lg:w-[35%] xl:2-[30%]">
                         <h2 class="font-normal xl:font-semibold text-sm lg:text-lg text-white mb-3 lg:mb-5">Menu Utama</h2>
+
                         <div class="flex flex-col gap-4 text-white font-light xl:font-normal text-xs lg:text-base ml-2">
                             <li>
                                 <a href="<?= BASEURL; ?>/Home_controller#beranda">Beranda</a>
@@ -77,6 +81,7 @@
         <div class="pt-3 lg:pt-5 pb-4 lg:bt-5">
             <h4 class="text-slate-700 text-xs lg:text-base text-center font-light">copyright 2025 Pemerintah Desa Konoha</h4>
         </div>
+
     </footer>
     <!-- FOOTER END -->
 </section>

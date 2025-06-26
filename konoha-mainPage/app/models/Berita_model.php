@@ -9,28 +9,50 @@ class Berita_model {
     }
 
     public function getBeritaAll() {
-        $query = "SELECT * FROM " . $this->table_name;  
+        try {
+            $query = "SELECT * FROM " . $this->table_name;  
+    
+            $this->conn->query($query);
 
-        $this->conn->query($query);
-        return $this->conn->getAll();    
+            return $this->conn->getAll();    
+
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }  
     }
 
     public function getBerita($id_berita) {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita = :id_berita LIMIT 4";
+        try {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita = :id_berita LIMIT 4";
+    
+            $this->conn->query($query); 
+            $this->conn->bindParam(':id_berita', $id_berita);
 
-        $this->conn->query($query);
+            return $this->conn->get();   
 
-        $this->conn->bindParam(':id_berita', $id_berita);
-        return $this->conn->get();   
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }  
     }
     
     public function getSugestion($id_berita) {
-        $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita != :id_berita LIMIT 2";
-    
-        $this->conn->query($query);
-
-        $this->conn->bindParam(':id_berita', $id_berita); // <--- ini WAJIB
-        return $this->conn->getAll();    
+        try {
+            $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita != :id_berita LIMIT 2";
+        
+            $this->conn->query($query);
+            $this->conn->bindParam(':id_berita', $id_berita); // <--- ini WAJIB
+            
+            return $this->conn->getAll();    
+            
+        } catch (Exception $e) {
+            error_log($e->getMessage());
+            header("Location: " . BASEURL . "/Error_controller");
+            exit;
+        }  
     }
 }
 

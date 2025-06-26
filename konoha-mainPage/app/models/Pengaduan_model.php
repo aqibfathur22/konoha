@@ -10,7 +10,6 @@ class Pengaduan_model {
     }
 
     public function create($data) {
-
         try {
             $namaPelapor = htmlspecialchars(strip_tags($data['nama_pelapor']));
             $nomorTelepon = htmlspecialchars(strip_tags($data['nomor_telepon']));
@@ -32,7 +31,6 @@ class Pengaduan_model {
 
             $this->conn->query($query);
 
-            // Bind parameters
             $this->conn->bindParam(":nama_pelapor", $namaPelapor);
             $this->conn->bindParam(":nomor_telepon", $nomorTelepon);
             $this->conn->bindParam(":id_kategori", $kategoriPengaduan);
@@ -41,12 +39,16 @@ class Pengaduan_model {
             $this->conn->bindParam(":path_lampiran", $pathLampiran);
 
             $this->conn->execute();
+
             return $this->conn->rowCount();
+
         } catch (Exception $e) {
+            error_log($e->getMessage());
             header("Location: " . BASEURL . "/Error_controller");
-        }
-        
-            
+            exit;
+        }  
+
+
     }
 
     public function getKategori() {
@@ -58,7 +60,6 @@ class Pengaduan_model {
         } catch (Exception $e) {
             header("Location: " . BASEURL . "/Error_controller");
         }        
-
     }
 
     public function upload() {       
