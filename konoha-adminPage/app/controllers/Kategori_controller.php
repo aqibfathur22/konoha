@@ -33,6 +33,7 @@ class Kategori_controller extends Controllers {
 
     public function deleteKategori($idKategori) {
         if ($this->model('Kategori_model')->delete($idKategori) > 0) {
+            Flasher::setFlash('Kategori berhasil dihapus', 'success');
             header("Location: " . BASEURL . " /Kategori_controller");
             exit;
         }

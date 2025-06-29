@@ -19,7 +19,7 @@ class Berita_controller extends Controllers {
     }
 
     public function createBerita() {
-        if ($this->model('Berita_Model')->create($_POST) > 0) {
+        if ($this->model('Berita_model')->create($_POST) > 0) {
             Flasher::setFlash('Berita berhasil ditambahkan', 'success');
             header("Location: " . BASEURL . "/Berita_controller");
             exit;
@@ -31,7 +31,7 @@ class Berita_controller extends Controllers {
     }
 
     public function updateBerita() {
-        if ($this->model('Berita_Model')->update($_POST) > 0) {
+        if ($this->model('Berita_model')->update($_POST) > 0) {
             Flasher::setFlash('Berita berhasil diperbarui', 'success');
             header("Location: " . BASEURL . "/Berita_controller");
             exit;
@@ -43,7 +43,8 @@ class Berita_controller extends Controllers {
     }
 
     public function deleteBerita($idberita) {
-        if ($this->model('Berita_Model')->delete($idberita) > 0) {
+        if ($this->model('Berita_model')->delete($idberita) > 0) {
+            Flasher::setFlash('Berita berhasil dihapus', 'success');
             header("Location: " . BASEURL . "/Berita_controller");
             exit;
         }

@@ -51,16 +51,18 @@ class Berita_model {
 
             $judulBerita = htmlspecialchars(strip_tags($data['judul']));
             $deskripsiBerita = htmlspecialchars(strip_tags($data['deskripsi']));
+            $authorBerita = htmlspecialchars(strip_tags($data['author']));
             
             $query = "INSERT INTO " . $this->table_name . "
-                    (gambar, judul, deskripsi)
-                    VALUES (:gambar, :judul, :deskripsi)";
+                    (gambar, judul, deskripsi, author)
+                    VALUES (:gambar, :judul, :deskripsi, :author)";
 
             $this->conn->query($query);
 
             $this->conn->bind(":gambar", $gambarBerita);
             $this->conn->bind(":judul", $judulBerita);
             $this->conn->bind(":deskripsi", $deskripsiBerita);
+            $this->conn->bind(":author", $authorBerita);
 
             $this->conn->execute();
 
@@ -96,11 +98,13 @@ class Berita_model {
             }
     
             $judulBerita = htmlspecialchars(strip_tags($data['judul']));
+            $authorBerita = htmlspecialchars(strip_tags($data['author']));
             $deskripsiBerita = htmlspecialchars(strip_tags($data['deskripsi']));
             $idBerita = htmlspecialchars(strip_tags($data['id_berita']));
             
             $query = "UPDATE " . $this->table_name . " SET
                         judul = :judul,
+                        author = :author,
                         deskripsi = :deskripsi";
 
             if (!empty($_FILES['gambar']['name'])) {
@@ -112,6 +116,7 @@ class Berita_model {
             $this->conn->query($query);
 
             $this->conn->bind(":judul", $judulBerita);
+            $this->conn->bind(":author", $authorBerita);
             $this->conn->bind(":deskripsi", $deskripsiBerita);
             if (!empty($_FILES['gambar']['name'])) {
                 $this->conn->bind(":gambar", $gambarBerita);

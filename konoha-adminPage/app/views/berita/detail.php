@@ -53,13 +53,24 @@
                         </div>
 
                         <div class="my-3">
+                            <label class="block text-lg font-medium mb-1 text-slate-950">Author</label>
+                            <input
+                                name="author"
+                                id="judul"
+                                spellcheck="false"  
+                                type="text"
+                                value="<?= $data['detailBerita']['author'] ?>"
+                                class="w-full border border-sky-400 hover:border-sky-800 p-2 rounded-lg text-slate-950" />
+                        </div>
+
+                        <div class="my-3">
                             <label class="block text-lg font-medium mb-1 text-slate-950">Deskripsi</label>
                             <textarea
                                 name="deskripsi"
                                 id="deskripsi"
                                 spellcheck="false"
-                                rows="14"
-                                class="w-full border border-sky-400 hover:border-sky-800 p-[18px] rounded-lg text-slate-950 resize-none"><?= htmlspecialchars(trim($data['detailBerita']['deskripsi'])) ?></textarea>
+                                rows="10"
+                                class="w-full border border-sky-400 hover:border-sky-800 p-[22px] rounded-lg text-slate-950 resize-none"><?= htmlspecialchars(trim($data['detailBerita']['deskripsi'])) ?></textarea>
                         </div>
                     </div>
                 </div>

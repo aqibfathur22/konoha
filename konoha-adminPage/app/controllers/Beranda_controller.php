@@ -71,6 +71,7 @@ class Beranda_controller extends Controllers {
 
     public function deleteAduan($idPengaduan){
         if ($this->model('Beranda_model')->delete($idPengaduan) > 0) {
+            Flasher::setFlash('Aduan berhasil dihapus', 'success');
             header("Location: " . BASEURL . " /Beranda_controller");
             exit;
         }

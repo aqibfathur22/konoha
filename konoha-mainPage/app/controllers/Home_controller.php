@@ -56,7 +56,8 @@ class Home_controller extends Controllers {
 
         $this->view("templates/header", $data);
         $this->view("home/detailBerita", $data);
-        $this->view("templates/footer", );
+        $this->view("home/footer", $data);
+        $this->view("templates/footer");
     }
 }
 

@@ -36,10 +36,10 @@
                 <?php endif; ?>
             </div>
 
-            <div class="flex justify-between items-center text-sm">
+            <!-- <div class="flex justify-between items-center text-sm">
                 <label class="flex items-center"><input type="checkbox" class="mr-2" /> Ingat saya</label>
                 <a href="#" class="text-blue-600 hover:underline">Lupa kata sandi?</a>
-            </div>
+            </div> -->
 
             <div>
                 <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-full hover:bg-blue-700 transition duration-300">

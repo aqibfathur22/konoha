@@ -37,19 +37,29 @@
                         </div>
 
                         <div class="my-3">
+                            <label class="block text-lg font-medium mb-1 text-slate-950">Author</label>
+                            <input
+                                name="author"
+                                id="judul"
+                                spellcheck="false"  
+                                type="text"
+                                class="w-full border border-sky-400 hover:border-sky-800 p-2 rounded-lg text-slate-950 font-medium" />
+                        </div>
+
+                        <div class="my-3">
                             <label class="block text-lg font-medium mb-1 text-slate-950">Deskripsi</label>
                             <textarea
                                 name="deskripsi"
                                 id="deskripsi"
                                 spellcheck="false"
-                                rows="14"
-                                class="w-full border border-sky-400 hover:border-sky-800 p-[18px] rounded-lg text-slate-950 resize-none"></textarea>
+                                rows="10"
+                                class="w-full border border-sky-400 hover:border-sky-800 p-[22px] rounded-lg text-slate-950 resize-none"></textarea>
                         </div>
                     </div>
                 </div>
                 
                 <div class="mt-8 mb-5 flex gap-4 w-full">
-                    <button type="submit" class="bg-sky-600 hover:bg-sky-700 rounded-lg flex-1 h-10 text-center text-white">Batal</button>
+                    <button type="reset" class="bg-sky-600 hover:bg-sky-700 rounded-lg flex-1 h-10 text-center text-white">Batal</button>
                     <button type="submit" class="simpan-btn-berita bg-sky-600 hover:bg-sky-700 rounded-lg flex-1 h-10 text-center text-white">Simpan</button>
                 </div>
             </form>
@@ -82,7 +92,7 @@
                     </td>
                     <td class="px-6 py-4 w-[30%]"><?= htmlspecialchars($berita['judul']) ?></td>
                     <td class="px-4 py-4 w-[15%] text-center"><?= htmlspecialchars($berita['tanggal_berita']) ?></td>
-                    <td class="px-4 py-4 text-center"><?= htmlspecialchars($berita['id_admin']) ?></td>
+                    <td class="px-4 py-4 text-center"><?= htmlspecialchars($berita['author']) ?></td>
                     <td class="px-4 py-4 w-[5%] justify-center text-center">
                         <a
                             href="<?=BASEURL?>/Berita_controller/detail/<?= $berita['id_berita'] ?>"
