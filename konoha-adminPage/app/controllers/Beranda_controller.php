@@ -2,6 +2,12 @@
 
 class Beranda_controller extends Controllers {
     public function index() {
+        session_status();
+        if (!isset($_SESSION['user'])) {
+            header("Location: " . BASEURL . "/Login_controller");
+            exit;
+        }
+
         $data['title'] = 'Admin - Beranda';
         $data['dataStatistik'] = $this->model('Beranda_model')->getStatistik($data);
         $data['dataPengaduan'] = $this->model('Beranda_model')->getAllStatistik();

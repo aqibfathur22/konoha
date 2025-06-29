@@ -1,6 +1,6 @@
 <main class="flex-1 overflow-y-auto p-4">
     <div class="grid grid-cols-1 gap-8">
-        <div class="bg-white border rounded-lg p-4 border-sky-800">
+        <div class="bg-white rounded-lg p-4 shadow-md">
             <h2 class="font-bold text-xl mb-2 text-slate-950">Edit Berita</h2>
 
             <form action="<?= BASEURL; ?>/berita_controller/updateBerita" method="post" enctype="multipart/form-data">

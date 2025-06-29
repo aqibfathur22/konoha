@@ -9,7 +9,7 @@ class Flasher {
     }
 
     public static function Flash() {
-        if(isset($_SESSION['flash'])) {
+        if(isset($_SESSION['flash'])) { 
             $flash = $_SESSION['flash'];
             echo "
             <script>
@@ -26,4 +26,4 @@ class Flasher {
     }
 }
 
-?>
+?>      

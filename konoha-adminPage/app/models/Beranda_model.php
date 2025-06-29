@@ -21,7 +21,7 @@ class Beranda_model {
             $this->conn->query($query);
             $this->conn->execute();   
 
-            $result = $this->conn->get();
+            $result = $this->conn->single();
             
             $data = [
                 'total' => $result['total'],
@@ -65,9 +65,9 @@ class Beranda_model {
                       WHERE p.id_pengaduan = :id";
     
             $this->conn->query($query);
-            $this->conn->bindParam(':id', $id);
+            $this->conn->bind(':id', $id);
     
-            return $this->conn->get();
+            return $this->conn->single();
 
         } catch (Exception $e) {
             error_log($e->getMessage());
@@ -161,8 +161,8 @@ class Beranda_model {
 
             $this->conn->query($query);
 
-            $this->conn->bindParam(':status', $newStatus);
-            $this->conn->bindParam(':id_pengaduan', $idPengaduan);
+            $this->conn->bind(':status', $newStatus);
+            $this->conn->bind(':id_pengaduan', $idPengaduan);
             
             return $this->conn->execute();
             
@@ -178,7 +178,7 @@ class Beranda_model {
             $query = "DELETE FROM " . $this->table_name . " WHERE id_pengaduan = :id_pengaduan";
     
             $this->conn->query($query);
-            $this->conn->bindParam(':id_pengaduan', $idPengaduan);   
+            $this->conn->bind(':id_pengaduan', $idPengaduan);   
             $this->conn->execute();
 
             return $this->conn->rowCount();

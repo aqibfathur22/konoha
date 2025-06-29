@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 class Database {
     private $host = "localhost";
@@ -11,16 +11,16 @@ class Database {
     public function __construct() {
         try {
             $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->db_name . ";charset=utf8mb4",
+                "mysql:host={$this->host};dbname={$this->db_name};charset=utf8mb4",
                 $this->username,
                 $this->password,
-                array(
+                [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
                     PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4"
-                )
+                ]
             );
-        } catch(PDOException $exception) {
+        } catch (PDOException $exception) {
             die($exception->getMessage());
         }
     }
@@ -33,28 +33,35 @@ class Database {
         $this->stmt = $this->conn->prepare($query);
     }
 
-    public function bindParam( $param, $value, $type = null) {
+    // ubah nama jadi bind agar sesuai dengan Register_model
+    public function bind($param, $value, $type = null) {
         if (is_null($type)) {
             switch (true) {
-                case is_int($value) :
+                case is_int($value):
                     $type = PDO::PARAM_INT;
                     break;
-                case is_bool($value) :
+                case is_bool($value):
                     $type = PDO::PARAM_BOOL;
                     break;
-                case is_null($value) :
+                case is_null($value):
                     $type = PDO::PARAM_NULL;
                     break;
-                default :
+                default:
                     $type = PDO::PARAM_STR;
             }
         }
-
         $this->stmt->bindValue($param, $value, $type);
     }
 
+    // kembalikan true/false
     public function execute() {
-        $this->stmt->execute();
+        return $this->stmt->execute();
+    }
+
+    // untuk ambil 1 baris
+    public function single() {
+        $this->execute();
+        return $this->stmt->fetch(PDO::FETCH_ASSOC);
     }
 
     public function getAll() {
@@ -62,14 +69,7 @@ class Database {
         return $this->stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function get() {
-        $this->execute();
-        return $this->stmt->fetch(PDO::FETCH_ASSOC);
-    }
-
     public function rowCount() {
         return $this->stmt->rowCount();
     }
 }
-
-?>

@@ -2,6 +2,8 @@
 
 class Kategori_controller extends Controllers {
     public function index() {
+        session_status();
+
         $data['title'] = "Admin - Kategori";
 
         $data['berandaNav'] = 'flex items-center gap-2 p-2 mt-2 group hover:bg-white/50 hover:text-slate-800 rounded-lg transition';

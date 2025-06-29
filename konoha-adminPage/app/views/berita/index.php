@@ -1,6 +1,6 @@
-<main class="flex-1 overflow-y-auto p-4">
+<main class="p-8 overflow-y-auto flex-1">
     <div class="grid grid-cols-1 gap-8">
-        <div class="bg-white border rounded-lg p-4 border-sky-800">
+        <div class="bg-white rounded-lg p-4 shadow-md">
             <h2 class="font-bold text-xl mb-2 text-slate-950">Berita dan Informasi</h2>
 
             <form action="<?= BASEURL; ?>/berita_controller/createBerita" method="post" enctype="multipart/form-data">
@@ -48,66 +48,64 @@
                     </div>
                 </div>
                 
-                <div class="mt-8 flex gap-4 w-full">
+                <div class="mt-8 mb-5 flex gap-4 w-full">
                     <button type="submit" class="bg-sky-600 hover:bg-sky-700 rounded-lg flex-1 h-10 text-center text-white">Batal</button>
                     <button type="submit" class="simpan-btn-berita bg-sky-600 hover:bg-sky-700 rounded-lg flex-1 h-10 text-center text-white">Simpan</button>
                 </div>
             </form>
         </div>
 
-        <div class="bg-white border rounded-lg p-4 border-sky-800 overflow-x-scroll">
-            <table class="w-full text-slate-800 border border-sky-800 rounded-lg overflow-hidden shadow-md mb-4">
-                <thead class="bg-sky-800 text-white">
-                    <tr>
-                        <th class="pl-16 py-2 w-[3%] text-center">No</th>
-                        <th class="px-6 py-2 w-[20%] text-center">Gambar</th>
-                        <th class="px-6 py-2 w-[30%] text-left">Judul Berita</th>
-                        <th class="px-4 py-2 w-[15%] text-center">Tanggal</th>
-                        <th class="px-4 py-2 text-center">Author</th>
-                        <th class="px-4 py-2 w-[5%] text-center">Ubah</th>
-                        <th class="px-4 pr-16 py-2 w-[5%] text-center">Hapus</th>
-                    </tr>
-                </thead>
-                <tbody class="bg-white divide-y divide-slate-200">
-                    <?php if (!empty($data['dataBerita'])) : ?>
-                    <?php $no = 1;  ?>
-                    <?php foreach ($data['dataBerita'] as $berita): ?>
-                    <tr>
-                        <td class="pl-16 py-4 w-[3%] text-center"><?= $no++ ?></td>
-                        <td class="px-6 py-4 w-[20%] text-center">
-                            <div class="w-3/4 rounded-xl overflow-hidden mx-auto">
-                                <img
-                                    src="http://localhost/konoha/images/berita/<?= htmlspecialchars($berita['gambar']) ?>"
-                                    class="rounded-xl object-cover w-full" />
-                            </div>
-                        </td>
-                        <td class="px-6 py-4 w-[30%]"><?= htmlspecialchars($berita['judul']) ?></td>
-                        <td class="px-4 py-4 w-[15%] text-center"><?= htmlspecialchars($berita['tanggal_berita']) ?></td>
-                        <td class="px-4 py-4 text-center"><?= htmlspecialchars($berita['id_admin']) ?></td>
-                        <td class="px-4 py-4 w-[5%] justify-center text-center">
-                            <a
-                                href="<?=BASEURL?>/Berita_controller/detail/<?= $berita['id_berita'] ?>"
-                                class="editBerita px-6 py-1 bg-sky-600 hover:bg-sky-700 rounded-xl flex-1 h-7 w-15 text-center text-white">
-                                Edit
-                            </a>
-                        </td>
-                        <td class="px-4 pr-16 py-4 w-[5%] justify-center text-center">
-                            <a
-                                href="<?=BASEURL?>/Berita_controller/deleteBerita/<?= $berita['id_berita'] ?>"
-                                class="delete-btn-berita px-4 py-1 bg-red-700 hover:bg-red-800 rounded-xl flex-1 h-7 w-15 text-center text-white">
-                                Hapus
-                            </a>
-                        </td>
-                    </tr>
-                    <?php endforeach; ?>
+        <table class="w-full text-slate-800 border border-sky-800 rounded-lg overflow-hidden shadow-md my-4">
+            <thead class="bg-sky-800 text-white">
+                <tr>
+                    <th class="pl-16 py-2 w-[3%] text-center">No</th>
+                    <th class="px-6 py-2 w-[20%] text-center">Gambar</th>
+                    <th class="px-6 py-2 w-[30%] text-left">Judul Berita</th>
+                    <th class="px-4 py-2 w-[15%] text-center">Tanggal</th>
+                    <th class="px-4 py-2 text-center">Author</th>
+                    <th class="px-4 py-2 w-[5%] text-center">Ubah</th>
+                    <th class="px-4 pr-16 py-2 w-[5%] text-center">Hapus</th>
+                </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-slate-200">
+                <?php if (!empty($data['dataBerita'])) : ?>
+                <?php $no = 1;  ?>
+                <?php foreach ($data['dataBerita'] as $berita): ?>
+                <tr>
+                    <td class="pl-16 py-4 w-[3%] text-center"><?= $no++ ?></td>
+                    <td class="px-6 py-4 w-[20%] text-center">
+                        <div class="w-3/4 rounded-xl overflow-hidden mx-auto">
+                            <img
+                                src="http://localhost/konoha/images/berita/<?= htmlspecialchars($berita['gambar']) ?>"
+                                class="rounded-xl object-cover w-full" />
+                        </div>
+                    </td>
+                    <td class="px-6 py-4 w-[30%]"><?= htmlspecialchars($berita['judul']) ?></td>
+                    <td class="px-4 py-4 w-[15%] text-center"><?= htmlspecialchars($berita['tanggal_berita']) ?></td>
+                    <td class="px-4 py-4 text-center"><?= htmlspecialchars($berita['id_admin']) ?></td>
+                    <td class="px-4 py-4 w-[5%] justify-center text-center">
+                        <a
+                            href="<?=BASEURL?>/Berita_controller/detail/<?= $berita['id_berita'] ?>"
+                            class="editBerita px-6 py-1 bg-sky-600 hover:bg-sky-700 rounded-xl flex-1 h-7 w-15 text-center text-white">
+                            Edit
+                        </a>
+                    </td>
+                    <td class="px-4 pr-16 py-4 w-[5%] justify-center text-center">
+                        <a
+                            href="<?=BASEURL?>/Berita_controller/deleteBerita/<?= $berita['id_berita'] ?>"
+                            class="delete-btn-berita px-4 py-1 bg-red-700 hover:bg-red-800 rounded-xl flex-1 h-7 w-15 text-center text-white">
+                            Hapus
+                        </a>
+                    </td>
+                </tr>
+                <?php endforeach; ?>
 
-                    <?php else: ?>
-                    <tr>
-                        <td colspan="4" class="py-4 px-6 text-center text-slate-500">Belum ada pengaduan yang selesai.</td>
-                    </tr>
-                    <?php endif; ?>
-                </tbody>
-            </table>
-        </div>
+                <?php else: ?>
+                <tr>
+                    <td colspan="4" class="py-4 px-6 text-center text-slate-500">Belum ada pengaduan yang selesai.</td>
+                </tr>
+                <?php endif; ?>
+            </tbody>
+        </table>
     </div>
 </main>

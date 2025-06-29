@@ -28,9 +28,9 @@ class Profil_model {
             $query = "SELECT * FROM " . $this->table_name . " WHERE id_profil = :id_profil";
     
             $this->conn->query($query);
-            $this->conn->bindParam(':id_profil', $id_profil);
+            $this->conn->bind(':id_profil', $id_profil);
     
-            return $this->conn->get();
+            return $this->conn->single();
 
         } catch (Exception $e) {
             error_log($e->getMessage());
@@ -75,11 +75,11 @@ class Profil_model {
     
             $this->conn->query($query);
 
-            $this->conn->bindParam(":deskripsi", $deskripsiProfil);
+            $this->conn->bind(":deskripsi", $deskripsiProfil);
             if (!empty($_FILES['gambar']['name'])) {
-                $this->conn->bindParam(":gambar", $gambarProfil);
+                $this->conn->ram(":gambar", $gambarProfil);
             }
-            $this->conn->bindParam(":id_profil", $idProfil);
+            $this->conn->bind(":id_profil", $idProfil);
     
             $this->conn->execute();
 

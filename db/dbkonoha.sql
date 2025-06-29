@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Jun 2025 pada 06.10
--- Versi server: 10.4.32-MariaDB
--- Versi PHP: 8.2.12
+-- Generation Time: Jun 29, 2025 at 09:59 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kategoripengaduan`
+-- Table structure for table `kategoripengaduan`
 --
 
 CREATE TABLE `kategoripengaduan` (
@@ -33,7 +33,7 @@ CREATE TABLE `kategoripengaduan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `kategoripengaduan`
+-- Dumping data for table `kategoripengaduan`
 --
 
 INSERT INTO `kategoripengaduan` (`id_kategori`, `nama_kategori`) VALUES
@@ -46,27 +46,29 @@ INSERT INTO `kategoripengaduan` (`id_kategori`, `nama_kategori`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `log_admin`
+-- Table structure for table `log_admin`
 --
 
 CREATE TABLE `log_admin` (
   `id_admin` int(11) NOT NULL,
-  `email` varchar(225) NOT NULL,
-  `password` varchar(225) NOT NULL
+  `nama` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nama_depan` varchar(255) DEFAULT NULL,
+  `nama_belakang` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `log_admin`
+-- Dumping data for table `log_admin`
 --
 
-INSERT INTO `log_admin` (`id_admin`, `email`, `password`) VALUES
-(1, 'anhar24@students.amikom.ac.id', '12345678'),
-(2, 'admin', '12345678');
+INSERT INTO `log_admin` (`id_admin`, `nama`, `password`, `nama_depan`, `nama_belakang`, `email`) VALUES
+(1, 'ayam jago enaknyooo', '$2y$10$Ix7SK3T1ZcKxE0/1jHrOC.Z7ybpWx0EgZx4V6Wj.Pth/6vHUKTeG6', 'ayam', 'jago', 'ayamjago@gmail.com');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `pengaduan`
+-- Table structure for table `pengaduan`
 --
 
 CREATE TABLE `pengaduan` (
@@ -82,7 +84,7 @@ CREATE TABLE `pengaduan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `pengaduan`
+-- Dumping data for table `pengaduan`
 --
 
 INSERT INTO `pengaduan` (`id_pengaduan`, `nama_pelapor`, `nomor_telepon`, `id_kategori`, `judul_pengaduan`, `detail_pengaduan`, `path_lampiran`, `tanggal_dikirim`, `status`) VALUES
@@ -96,7 +98,7 @@ INSERT INTO `pengaduan` (`id_pengaduan`, `nama_pelapor`, `nomor_telepon`, `id_ka
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `profil_desa`
+-- Table structure for table `profil_desa`
 --
 
 CREATE TABLE `profil_desa` (
@@ -106,7 +108,7 @@ CREATE TABLE `profil_desa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `profil_desa`
+-- Dumping data for table `profil_desa`
 --
 
 INSERT INTO `profil_desa` (`id_profil`, `gambar`, `deskripsi`) VALUES
@@ -115,7 +117,7 @@ INSERT INTO `profil_desa` (`id_profil`, `gambar`, `deskripsi`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `tb_berita`
+-- Table structure for table `tb_berita`
 --
 
 CREATE TABLE `tb_berita` (
@@ -128,7 +130,7 @@ CREATE TABLE `tb_berita` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data untuk tabel `tb_berita`
+-- Dumping data for table `tb_berita`
 --
 
 INSERT INTO `tb_berita` (`id_berita`, `gambar`, `judul`, `tanggal_berita`, `deskripsi`, `id_admin`) VALUES
@@ -137,162 +139,92 @@ INSERT INTO `tb_berita` (`id_berita`, `gambar`, `judul`, `tanggal_berita`, `desk
 (23, '685248cdd55ad.jpeg', 'Kerja Bakti ', '2025-06-24 11:24:32', 'Pada 18 Juni 2025, Desa Konoha telah melaksanakan kerja bakti untuk memperbaiki jalan. Selain memperbaiki jalan program kerja bakti juga mempererat silahturahmi antar warga desa.;.', NULL),
 (24, '685a8bc6163f1.jpg', 'Penghargaan Desa Konohaa', '2025-06-24 11:28:06', 'Pada tanggal 15 Juli 2025, Desa konoha mendapat penghargaan Desa tebaik dalam pengelolaan dan pendistribusian dana desa.', NULL);
 
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tb_demografi`
---
-
-CREATE TABLE `tb_demografi` (
-  `id_demografi` int(11) NOT NULL,
-  `penduduk` int(11) NOT NULL,
-  `kepala_keluarga` int(11) NOT NULL,
-  `perempuan` int(11) NOT NULL,
-  `lakilaki` int(11) NOT NULL,
-  `grafik` varchar(225) NOT NULL,
-  `label` varchar(225) NOT NULL,
-  `nilai` int(11) NOT NULL,
-  `id_admin` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Struktur dari tabel `tb_keuangan`
---
-
-CREATE TABLE `tb_keuangan` (
-  `id_keuangan` int(11) NOT NULL,
-  `jumlah` decimal(19,2) NOT NULL,
-  `tanggal` date NOT NULL,
-  `rincian` text DEFAULT NULL,
-  `id_admin` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `kategoripengaduan`
+-- Indexes for table `kategoripengaduan`
 --
 ALTER TABLE `kategoripengaduan`
   ADD PRIMARY KEY (`id_kategori`),
   ADD UNIQUE KEY `nama_kategori` (`nama_kategori`);
 
 --
--- Indeks untuk tabel `log_admin`
+-- Indexes for table `log_admin`
 --
 ALTER TABLE `log_admin`
   ADD PRIMARY KEY (`id_admin`);
 
 --
--- Indeks untuk tabel `pengaduan`
+-- Indexes for table `pengaduan`
 --
 ALTER TABLE `pengaduan`
   ADD PRIMARY KEY (`id_pengaduan`),
   ADD KEY `id_kategori` (`id_kategori`);
 
 --
--- Indeks untuk tabel `profil_desa`
+-- Indexes for table `profil_desa`
 --
 ALTER TABLE `profil_desa`
   ADD PRIMARY KEY (`id_profil`);
 
 --
--- Indeks untuk tabel `tb_berita`
+-- Indexes for table `tb_berita`
 --
 ALTER TABLE `tb_berita`
   ADD PRIMARY KEY (`id_berita`),
   ADD KEY `id_admin` (`id_admin`);
 
 --
--- Indeks untuk tabel `tb_demografi`
---
-ALTER TABLE `tb_demografi`
-  ADD PRIMARY KEY (`id_demografi`),
-  ADD KEY `id_admin` (`id_admin`);
-
---
--- Indeks untuk tabel `tb_keuangan`
---
-ALTER TABLE `tb_keuangan`
-  ADD PRIMARY KEY (`id_keuangan`),
-  ADD KEY `id_admin` (`id_admin`);
-
---
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `kategoripengaduan`
+-- AUTO_INCREMENT for table `kategoripengaduan`
 --
 ALTER TABLE `kategoripengaduan`
   MODIFY `id_kategori` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
--- AUTO_INCREMENT untuk tabel `log_admin`
+-- AUTO_INCREMENT for table `log_admin`
 --
 ALTER TABLE `log_admin`
-  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_admin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `pengaduan`
+-- AUTO_INCREMENT for table `pengaduan`
 --
 ALTER TABLE `pengaduan`
   MODIFY `id_pengaduan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `profil_desa`
+-- AUTO_INCREMENT for table `profil_desa`
 --
 ALTER TABLE `profil_desa`
   MODIFY `id_profil` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_berita`
+-- AUTO_INCREMENT for table `tb_berita`
 --
 ALTER TABLE `tb_berita`
   MODIFY `id_berita` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT untuk tabel `tb_demografi`
---
-ALTER TABLE `tb_demografi`
-  MODIFY `id_demografi` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT untuk tabel `tb_keuangan`
---
-ALTER TABLE `tb_keuangan`
-  MODIFY `id_keuangan` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
+-- Constraints for dumped tables
 --
 
 --
--- Ketidakleluasaan untuk tabel `pengaduan`
+-- Constraints for table `pengaduan`
 --
 ALTER TABLE `pengaduan`
   ADD CONSTRAINT `pengaduan_ibfk_1` FOREIGN KEY (`id_kategori`) REFERENCES `kategoripengaduan` (`id_kategori`);
 
 --
--- Ketidakleluasaan untuk tabel `tb_berita`
+-- Constraints for table `tb_berita`
 --
 ALTER TABLE `tb_berita`
   ADD CONSTRAINT `tb_berita_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `log_admin` (`id_admin`);
-
---
--- Ketidakleluasaan untuk tabel `tb_demografi`
---
-ALTER TABLE `tb_demografi`
-  ADD CONSTRAINT `tb_demografi_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `log_admin` (`id_admin`);
-
---
--- Ketidakleluasaan untuk tabel `tb_keuangan`
---
-ALTER TABLE `tb_keuangan`
-  ADD CONSTRAINT `tb_keuangan_ibfk_1` FOREIGN KEY (`id_admin`) REFERENCES `log_admin` (`id_admin`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

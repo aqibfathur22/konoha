@@ -1,6 +1,6 @@
-<main class="main flex-1 overflow-y-auto p-4">
+<main class="main flex-1 overflow-y-auto p-8">
     <div class="grid grid-cols-1">
-        <div class="bg-white border rounded-lg p-4 border-sky-800">
+        <div class="bg-white rounded-lg p-4 shadow-md">
             <h2 class="font-bold text-xl mb-5 text-slate-950">Profil Desa</h2>
 
             <form action="<?= BASEURL; ?>/Profil_controller/updateProfil" method="post" enctype="multipart/form-data">

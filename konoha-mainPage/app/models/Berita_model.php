@@ -28,7 +28,7 @@ class Berita_model {
             $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita = :id_berita LIMIT 4";
     
             $this->conn->query($query); 
-            $this->conn->bindParam(':id_berita', $id_berita);
+            $this->conn->bind(':id_berita', $id_berita);
 
             return $this->conn->get();   
 
@@ -44,7 +44,7 @@ class Berita_model {
             $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita != :id_berita LIMIT 2";
         
             $this->conn->query($query);
-            $this->conn->bindParam(':id_berita', $id_berita); // <--- ini WAJIB
+            $this->conn->bind(':id_berita', $id_berita); // <--- ini WAJIB
             
             return $this->conn->getAll();    
             

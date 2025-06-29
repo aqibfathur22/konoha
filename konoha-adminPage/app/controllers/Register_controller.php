@@ -6,16 +6,16 @@ class Register_controller extends Controllers {
             $username = $_POST['nama'];
             $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-            $result = $this->model('Register_model')->register($username, $password);
+            $hasil = $this->model('Register_model')->register($username, $password);
 
-            if ($result) {
+            if ($hasil) {
                 header('Location: ' . BASEURL . '/login');
                 exit;
             } else {
-                $data['error'] = 'Pendaftaran gagal. Username mungkin sudah terdaftar.';
+                $data['error'] = 'Username sudah digunakan.';
             }
         }
 
-        $this->view('register/index', $data ?? []);
+        $this->view("register/index", $data ?? []);
     }
 }

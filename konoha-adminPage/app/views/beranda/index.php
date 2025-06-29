@@ -1,5 +1,5 @@
 <main class="p-4 overflow-y-auto flex-1">
-    <div class="bg-slate-50 border rounded-lg p-4 shadow-md mt-5">
+    <div class="bg-slate-100 rounded-lg p-4 mt-5">
         <form action="" method="post">
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-8 mb-16">
                 <!-- Total -->

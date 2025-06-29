@@ -2,22 +2,28 @@
 
 class Login_controller extends Controllers {
     public function index(): void {
+        if (session_status() === PHP_SESSION_NONE) session_start();
+
+        $data = [];
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = $_POST['nama'];
             $password = $_POST['password'];
 
-            $user = $this->model('Login_model')->login($username, $password);
+            $user = $this->model('Login_model')->findByUsername($username);
 
-            if ($user) {
-                // Set session
+            if (!$user) {
+                $data['error_username'] = 'Nama pengguna tidak ditemukan.';
+            } elseif (!password_verify($password, $user['password'])) {
+                $data['error_password'] = 'Kata sandi salah.';
+            } else {
                 $_SESSION['user'] = $user;
+                $_SESSION['login_time'] = time();
                 header('Location: ' . BASEURL . '/admin_beranda');
                 exit;
-            } else {
-                $data['error'] = 'Username atau password salah.';
             }
         }
 
-        $this->view('login/index', $data ?? []);
+        $this->view('login/index', $data);
     }
 }

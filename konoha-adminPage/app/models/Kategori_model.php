@@ -30,7 +30,7 @@ class Kategori_model {
             $query = "INSERT INTO " . $this->table_name . " (nama_kategori) VALUES (:nama_kategori)";
     
             $this->conn->query($query);
-            $this->conn->bindParam(':nama_kategori', $namaKategori);
+            $this->conn->bind(':nama_kategori', $namaKategori);
             $this->conn->execute();
 
             return $this->conn->rowCount();
@@ -46,7 +46,7 @@ class Kategori_model {
             $query = "DELETE FROM " . $this->table_name . " WHERE id_kategori = :id_kategori";
     
             $this->conn->query($query);
-            $this->conn->bindParam(':id_kategori', $idKategori);
+            $this->conn->bind(':id_kategori', $idKategori);
             $this->conn->execute();
 
             return $this->conn->rowCount();

@@ -2,6 +2,8 @@
 
 class Berita_controller extends Controllers {
     public function index() {
+        session_status();
+
         $data['title'] = "Admin - Berita";
         $data['dataBerita'] = $this->model('Berita_model')->getAllBerita();
 

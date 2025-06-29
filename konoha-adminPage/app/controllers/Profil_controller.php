@@ -2,6 +2,8 @@
 
 class Profil_controller extends Controllers {
     public function index() {
+        session_status();
+
         $data['title'] = "Admin - Profil";
         
         $data['dataProfil'] = $this->model('Profil_model')->getAllProfil();

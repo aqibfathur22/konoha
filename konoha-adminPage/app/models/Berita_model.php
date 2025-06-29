@@ -28,9 +28,9 @@ class Berita_model {
             $query = "SELECT * FROM " . $this->table_name . " WHERE id_berita = :id_berita";
     
             $this->conn->query($query);
-            $this->conn->bindParam(':id_berita', $id_berita);
+            $this->conn->bind(':id_berita', $id_berita);
     
-            return $this->conn->get();
+            return $this->conn->single();
 
         } catch (Exception $e) {
             error_log($e->getMessage());
@@ -58,9 +58,9 @@ class Berita_model {
 
             $this->conn->query($query);
 
-            $this->conn->bindParam(":gambar", $gambarBerita);
-            $this->conn->bindParam(":judul", $judulBerita);
-            $this->conn->bindParam(":deskripsi", $deskripsiBerita);
+            $this->conn->bind(":gambar", $gambarBerita);
+            $this->conn->bind(":judul", $judulBerita);
+            $this->conn->bind(":deskripsi", $deskripsiBerita);
 
             $this->conn->execute();
 
@@ -111,12 +111,12 @@ class Berita_model {
     
             $this->conn->query($query);
 
-            $this->conn->bindParam(":judul", $judulBerita);
-            $this->conn->bindParam(":deskripsi", $deskripsiBerita);
+            $this->conn->bind(":judul", $judulBerita);
+            $this->conn->bind(":deskripsi", $deskripsiBerita);
             if (!empty($_FILES['gambar']['name'])) {
-                $this->conn->bindParam(":gambar", $gambarBerita);
+                $this->conn->bind(":gambar", $gambarBerita);
             }
-            $this->conn->bindParam(":id_berita", $idBerita);
+            $this->conn->bind(":id_berita", $idBerita);
     
             $this->conn->execute();
 
@@ -134,13 +134,13 @@ class Berita_model {
             $querySel = "SELECT gambar FROM " . $this->table_name . " WHERE id_berita = :id_berita";
 
             $this->conn->query($querySel);
-            $this->conn->bindParam(":id_berita", $idBerita);
+            $this->conn->bind(":id_berita", $idBerita);
             $this->conn->execute(); 
 
-            $result = $this->conn->get();
+            $result = $this->conn->single();
 
             if (!$result) {
-                return false; // Data tidak ditemukan
+                return false; 
             }
     
             $gambar = $result['gambar'];
@@ -148,7 +148,7 @@ class Berita_model {
             $queryDel = "DELETE FROM " . $this->table_name . " WHERE id_berita = :id_berita";
 
             $this->conn->query($queryDel);
-            $this->conn->bindParam(":id_berita", $idBerita);
+            $this->conn->bind(":id_berita", $idBerita);
             $this->conn->execute();
 
             $rowCount = $this->conn->rowCount();
@@ -200,7 +200,7 @@ class Berita_model {
                 return false;
             }
 
-            if( $ukuranFile > 2000000 ) {
+            if( $ukuranFile > 4000000 ) {
                 echo "<script>
                         alert('ukuran gambar terlalu besar!');
                     </script>";

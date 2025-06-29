@@ -31,12 +31,12 @@ class Pengaduan_model {
 
             $this->conn->query($query);
 
-            $this->conn->bindParam(":nama_pelapor", $namaPelapor);
-            $this->conn->bindParam(":nomor_telepon", $nomorTelepon);
-            $this->conn->bindParam(":id_kategori", $kategoriPengaduan);
-            $this->conn->bindParam(":judul_pengaduan", $judulPengaduan);
-            $this->conn->bindParam(":detail_pengaduan", $detailPengaduan);
-            $this->conn->bindParam(":path_lampiran", $pathLampiran);
+            $this->conn->bind(":nama_pelapor", $namaPelapor);
+            $this->conn->bind(":nomor_telepon", $nomorTelepon);
+            $this->conn->bind(":id_kategori", $kategoriPengaduan);
+            $this->conn->bind(":judul_pengaduan", $judulPengaduan);
+            $this->conn->bind(":detail_pengaduan", $detailPengaduan);
+            $this->conn->bind(":path_lampiran", $pathLampiran);
 
             $this->conn->execute();
 
