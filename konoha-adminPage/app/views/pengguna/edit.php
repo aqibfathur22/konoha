@@ -27,8 +27,8 @@ function waktuSejak($timestamp) {
                     </div>
                     <button 
                         type="button"
-                        class="text-sm px-3 py-1 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition"
-                        onclick="salinID()">
+                        onclick="salinID()"
+                        class="text-sm px-3 py-1 bg-sky-600 text-white rounded-full hover:bg-sky-700 transition">
                         salin
                     </button>
                 </div>
